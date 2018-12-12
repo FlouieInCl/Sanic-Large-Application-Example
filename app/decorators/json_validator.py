@@ -1,19 +1,19 @@
 from functools import wraps
 
-from flask import abort, request
 from jsonschema import ValidationError, validate
+from sanic.request import Request
+from sanic.response import text
 
 
 def validate_with_jsonschema(jsonschema: dict):
     def decorator(fn):
         @wraps(fn)
-        def wrapper(*args, **kwargs):
-            if request.is_json:
-                try:
-                    validate(request.json, jsonschema)
-                except ValidationError:
-                    abort(400)
+        async def wrapper(request: Request, *args, **kwargs):
+            try:
+                validate(request.json, jsonschema)
+            except ValidationError:
+                return text(None, 400)
 
-            return fn(*args, **kwargs)
+            return await fn(*args, **kwargs)
         return wrapper
     return decorator
