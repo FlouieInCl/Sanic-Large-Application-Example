@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 sanic = "*"
 pip = "==18.0"
+sanic-cors = "*"
+jsonschema = "*"
 
 [dev-packages]
 
