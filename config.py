@@ -6,7 +6,7 @@ class Config:
         'host': 'localhost',
         'port': 5000,
         'debug': True,
-        'workers': 10
+        'workers': 1
     }
     # uWSGI를 통해 배포되어야 하므로, production level에선 run setting을 건드리지 않음
 
