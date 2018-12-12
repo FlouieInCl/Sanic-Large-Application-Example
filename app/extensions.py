@@ -1,3 +1,3 @@
-from flask_cors import CORS
+from sanic_cors import CORS
 
 cors = CORS()
