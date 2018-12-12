@@ -1,7 +1,8 @@
-from flask import Response
+from sanic.request import Request
+from sanic.response import HTTPResponse
 
 
-def after_request(response: Response) -> Response:
+async def after_request(request: Request, response: HTTPResponse) -> HTTPResponse:
     try:
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['X-Frame-Options'] = 'deny'
