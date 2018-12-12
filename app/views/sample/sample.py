@@ -1,10 +1,11 @@
-from flask import request
-from flask_restful import Resource
+from sanic.request import Request
+from sanic.response import json
+from sanic.views import HTTPMethodView
 
 from app.decorators.json_validator import validate_with_jsonschema
 
 
-class Sample(Resource):
+class Sample(HTTPMethodView):
     @validate_with_jsonschema({
         'type': 'object',
         'required': ['age', 'name'],
@@ -18,7 +19,7 @@ class Sample(Resource):
             }
         }
     })
-    def post(self):
+    async def post(self, request: Request):
         payload = request.json
 
-        return payload, 201
+        return json(payload, 201)
