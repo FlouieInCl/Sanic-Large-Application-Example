@@ -8,6 +8,7 @@ sanic = "*"
 pip = "==18.0"
 sanic-cors = "*"
 jsonschema = "*"
+termcolor = "*"
 
 [dev-packages]
 
