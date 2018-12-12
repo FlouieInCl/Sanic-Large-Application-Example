@@ -1,4 +1,5 @@
 from sanic import Sanic
+from sanic.exceptions import SanicException
 
 from app.misc.log import log
 
@@ -16,10 +17,11 @@ def register_views(sanic_app: Sanic):
 
 
 def register_hooks(sanic_app: Sanic):
-    from app.hooks.error import broad_exception_handler
+    from app.hooks.error import broad_exception_handler, sanic_exception_handler
     from app.hooks.request_context import after_request
 
     sanic_app.register_middleware(after_request, 'response')
+    sanic_app.error_handler.add(SanicException, sanic_app)
     sanic_app.error_handler.add(Exception, broad_exception_handler)
 
 

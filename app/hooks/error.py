@@ -1,9 +1,11 @@
-from werkzeug.exceptions import HTTPException
+from sanic.exceptions import SanicException
+from sanic.request import Request
+from sanic.response import text
 
 
-def http_exception_handler(e: HTTPException):
-    return '', e.code
+async def sanic_exception_handler(request: Request, e: SanicException):
+    return text(None, e.status_code)
 
 
-def broad_exception_error_handler(e: Exception):
-    return '', 500
+async def broad_exception_handler(request: Request, e: Exception):
+    return text(None, 500)
