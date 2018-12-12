@@ -1,5 +1,6 @@
 from sanic import Sanic
 from sanic.exceptions import SanicException
+from sanic_cors import CORS
 
 from app.misc.log import log
 
@@ -7,7 +8,7 @@ from app.misc.log import log
 def register_extensions(sanic_app: Sanic):
     from app import extensions
 
-    extensions.cors.init_app(sanic_app)
+    extensions.cors = CORS(sanic_app)
 
 
 def register_views(sanic_app: Sanic):

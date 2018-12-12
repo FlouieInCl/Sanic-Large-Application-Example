@@ -1,3 +1,3 @@
 from sanic_cors import CORS
 
-cors = CORS()
+cors: CORS = None
